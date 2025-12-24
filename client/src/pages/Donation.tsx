@@ -94,12 +94,14 @@ export default function Donation() {
 
               <div className="grid grid-cols-2 gap-4 mb-8">
                 {amounts.map((amount) => (
-                  <button
+                  <motion.button
                     key={amount.value}
                     onClick={() => setSelectedAmount(amount.value)}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.98 }}
                     className={`p-4 rounded-xl border-2 transition-all text-left relative overflow-hidden group ${
                       selectedAmount === amount.value
-                        ? "border-primary bg-primary/5 text-primary"
+                        ? "border-primary bg-primary/5 text-primary shadow-lg shadow-primary/20"
                         : "border-gray-100 hover:border-primary/50 text-foreground"
                     }`}
                   >
@@ -110,7 +112,7 @@ export default function Donation() {
                         <Heart className="w-4 h-4 fill-current" />
                       </div>
                     )}
-                  </button>
+                  </motion.button>
                 ))}
               </div>
 

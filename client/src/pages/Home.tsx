@@ -16,10 +16,26 @@ export default function Home() {
     <div className="overflow-hidden">
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden bg-gradient-to-b from-blue-50/50 via-purple-50/30 to-white">
-        {/* Background Elements */}
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/5 to-transparent skew-x-12 transform origin-top-right pointer-events-none" />
-        <div className="absolute -top-24 -right-24 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 -left-24 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl" />
+        {/* Animated Background Elements */}
+        <motion.div 
+          className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/5 to-transparent skew-x-12 transform origin-top-right pointer-events-none" 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5 }}
+        />
+        <motion.div 
+          className="absolute -top-24 -right-24 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-float" 
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 0.2 }}
+        />
+        <motion.div 
+          className="absolute top-1/2 -left-24 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl animate-float" 
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 0.4 }}
+          style={{ animationDelay: '2s' }}
+        />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -28,32 +44,53 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
+              <motion.div 
+                className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6 border border-primary/20"
+                whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(250, 108, 211, 0.3)" }}
+              >
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                 </span>
                 Making the world a better place
-              </div>
-              <h1 className="text-5xl lg:text-7xl font-display font-bold text-foreground leading-[1.1] mb-6">
-                Empowering <span className="gradient-text">Lives</span>,<br />
+              </motion.div>
+              <motion.h1 
+                className="text-5xl lg:text-7xl font-display font-bold text-foreground leading-[1.1] mb-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                Empowering <motion.span 
+                  className="gradient-text inline-block"
+                  animate={{ backgroundPosition: ['0%', '100%'] }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                >Lives</motion.span>,<br />
                 Building Futures.
-              </h1>
+              </motion.h1>
               <p className="text-xl text-muted-foreground mb-8 leading-relaxed max-w-lg">
                 Join our mission to provide education, healthcare, and sustainable resources to communities in need worldwide.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <motion.div 
+                className="flex flex-col sm:flex-row gap-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              >
                 <Link href="/donation">
-                  <Button size="lg" className="rounded-full px-8 text-base h-12 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all hover:-translate-y-1">
-                    Donate Now <Heart className="ml-2 w-4 h-4 fill-white/20" />
-                  </Button>
+                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                    <Button size="lg" className="rounded-full px-8 text-base h-12 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all hover:-translate-y-1">
+                      Donate Now <Heart className="ml-2 w-4 h-4 fill-white/20" />
+                    </Button>
+                  </motion.div>
                 </Link>
                 <Link href="/who-we-are">
-                  <Button variant="outline" size="lg" className="rounded-full px-8 text-base h-12 hover:bg-secondary/50">
-                    Learn More <ArrowRight className="ml-2 w-4 h-4" />
-                  </Button>
+                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                    <Button variant="outline" size="lg" className="rounded-full px-8 text-base h-12 hover:bg-secondary/50">
+                      Learn More <ArrowRight className="ml-2 w-4 h-4" />
+                    </Button>
+                  </motion.div>
                 </Link>
-              </div>
+              </motion.div>
 
               <div className="mt-12 flex items-center gap-4 text-sm text-muted-foreground">
                 <div className="flex -space-x-3">
@@ -95,9 +132,10 @@ export default function Home() {
               
               {/* Floating Stat Card */}
               <motion.div 
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.6 }}
+                initial={{ opacity: 0, x: 20, y: 20 }}
+                animate={{ opacity: 1, x: 0, y: 0 }}
+                transition={{ delay: 0.6, duration: 0.8 }}
+                whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(0,0,0,0.15)" }}
                 className="absolute -bottom-8 -left-8 bg-white p-6 rounded-2xl shadow-xl max-w-xs border border-gray-100 hidden md:block"
               >
                 <div className="flex items-center gap-4">

@@ -49,8 +49,9 @@ export default function Admission() {
 
       <div className="container mx-auto px-4 -mt-10 relative z-20 pb-20">
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 40, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
           className="bg-white rounded-3xl shadow-xl p-8 md:p-12 max-w-4xl mx-auto border border-gray-100"
         >
           {mutation.isSuccess ? (

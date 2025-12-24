@@ -71,23 +71,40 @@ export default function Services() {
             {services.map((service, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="group bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-lg hover:shadow-2xl transition-all duration-300"
+                initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ delay: index * 0.15, duration: 0.6 }}
+                whileHover={{ 
+                  y: -10,
+                  boxShadow: "0 30px 60px rgba(0,0,0,0.12)"
+                }}
+                className="group bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-lg transition-all duration-300"
               >
-                <div className="h-48 overflow-hidden">
+                <motion.div 
+                  className="h-48 overflow-hidden relative"
+                  whileHover={{ scale: 1.05 }}
+                >
                   <img 
                     src={service.img} 
                     alt={service.title} 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover"
                   />
-                </div>
+                  <motion.div 
+                    className="absolute inset-0 bg-primary/20"
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </motion.div>
                 <div className="p-8">
-                  <div className={`w-14 h-14 rounded-2xl ${service.color} flex items-center justify-center mb-6`}>
+                  <motion.div 
+                    className={`w-14 h-14 rounded-2xl ${service.color} flex items-center justify-center mb-6`}
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ type: "spring", stiffness: 200 }}
+                  >
                     <service.icon className="w-7 h-7" />
-                  </div>
+                  </motion.div>
                   <h3 className="text-2xl font-bold font-display mb-3 group-hover:text-primary transition-colors">
                     {service.title}
                   </h3>
@@ -95,9 +112,11 @@ export default function Services() {
                     {service.desc}
                   </p>
                   <Link href="/admission">
-                    <Button variant="link" className="p-0 text-primary font-semibold hover:no-underline hover:gap-2 transition-all">
-                      Get Involved <span className="ml-1">&rarr;</span>
-                    </Button>
+                    <motion.div whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 300 }}>
+                      <Button variant="link" className="p-0 text-primary font-semibold hover:no-underline hover:gap-2 transition-all">
+                        Get Involved <span className="ml-1">&rarr;</span>
+                      </Button>
+                    </motion.div>
                   </Link>
                 </div>
               </motion.div>
